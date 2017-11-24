@@ -1,2 +1,35 @@
 # Back2Front
-前端框架
+
+基于Express和XTemplate的模块化开发框架
+
+
+## 模块化
+
+说起「模块化」这个词，很多人首先会想到Javascript的**AMD/CMD**规范。然而，页面上的一个模块是由HTML、CSS和Javascript共同组成的，而不光是Javascript。
+
+在本框架中，你可以把HTML、CSS和Javascript都写在一个文件（**\*.xtpl**）中，例如：
+
+```
+<header id="header" class="header"></header>
+{{#css ()}}
+.header {
+	background: gray;
+	height: 100px;
+}
+{{/css}}
+{{#modjs('lib/dom@1.1)}}
+function($) {
+	$('#header').text('I am header');
+}
+{{/modjs}}
+```
+
+也可以通过外链的方式引用CSS、Javascript代码：
+
+```
+<header id="header" class="header"></header>
+{{ css('./header') }}
+{{ modjs('./header') }}
+```
+
+这样就可以达到把HTML、CSS和Javascript封装为一个模块的目的。

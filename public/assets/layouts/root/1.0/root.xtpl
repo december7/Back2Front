@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ title }}</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no,email=no" />
+{{#if (keywords)}}<meta name="Keywords" content="{{ keywords }}" />{{/if}}
+{{#if (description)}}<meta name="Description" content="{{ description }}" />{{/if}}
+<script>var cssFiles = { }, jsFiles = { }, ASSET_URL_PREFIX = {{{ jsonEncode( assetURLPrefix() ) }}};</script>
+{{ headjs('./bowl') }}
+{{ headjs('./bowl-config') }}
+{{#each (headjsFiles)}}
+<script src="{{ this }}"></script>
+{{/each}}
+<!-- Headjs Hook -->
+{{ css('./root') }}
+{{#each (cssFiles)}}
+<script src="{{ this }}"></script>
+{{/each}}
+<!-- CSS Hook -->
+</head>
+
+<body>
+{{ block('body') }}
+{{#each (jsFiles)}}
+<script src="{{ this }}"></script>
+{{/each}}
+<!-- JS Hook -->
+{{#each (modjsFiles)}}
+<script src="{{ this }}"></script>
+{{/each}}
+<!-- Modjs Hook -->
+{{ block('end') }}
+</body>
+</html>
